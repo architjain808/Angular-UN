@@ -1,0 +1,11 @@
+form *{
+    margin: 10px;
+}
+form{
+    text-align: center;
+}
+.loading{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+}

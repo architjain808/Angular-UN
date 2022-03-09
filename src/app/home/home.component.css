@@ -1,0 +1,27 @@
+form{
+    position: absolute;
+    left: 25%;
+    top: 30%;
+}
+input
+{
+    border: 1px solid lightblue;
+    border-radius: 20px;
+    margin: 5px;
+    padding: 10px;
+}
+input:checked{
+    border: none;
+}
+button
+{
+    /* background-color: lightblue;
+    color: palevioletred; */
+    margin: 5px;
+    padding: 10px 20px;
+    /* border: none; */
+    border-radius: 20px;
+}
+input.ng-invalid.ng-touched{
+    border: 2px solid red;
+}   

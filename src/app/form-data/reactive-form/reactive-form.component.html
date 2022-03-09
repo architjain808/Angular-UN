@@ -1,0 +1,124 @@
+<div class="row">
+  <div class="col-4"></div>
+  <div class="col-4">
+    <form [formGroup]="dataForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <input
+          formControlName="Name"
+          type="text"
+          class="form-control"
+          placeholder="Name"
+        />
+        <small
+          *ngIf="!dataForm.get('Name')?.valid && dataForm.get('Name')?.touched"
+          class="form-text text-muted"
+          >Name is a required field</small
+        >
+      </div>
+      <div class="form-group">
+        <input
+          type="email"
+          class="form-control"
+          placeholder="Enter email"
+          formControlName="email"
+        />
+        <small
+          *ngIf="
+            !dataForm.get('email')?.valid && dataForm.get('email')?.touched
+          "
+          class="form-text text-muted"
+          >Not a valid Email</small
+        >
+      </div>
+
+      <div formArrayName="hobbies">
+        <button type="button" class="btn btn-primary" (click)="onAddHobbies()">
+          Add Hobbies
+        </button>
+        <div
+          class="form-group"
+          *ngFor="
+            let allHobbies of hobbies;
+            let i = index
+          "
+        >
+          <!-- <input type="text" class="form-control" [formControlName]="i"> -->
+          <input
+            type="text"
+            class="form-control"
+            placeholder="ADD"
+            [formControlName]="i"
+          />
+        </div>
+      </div>
+
+      <select formControlName="course" class="custom-select">
+        <option selected>Course</option>
+        <option *ngFor="let cou of Course" >{{ cou }}</option>
+      </select>
+      <select
+        formControlName="stream"
+        class="custom-select"
+        *ngIf="dataForm.value.course == 'Btech'"
+      >
+        <option selected>Stream</option>
+        <option *ngFor="let str of Stream">{{ str }}</option>
+      </select>
+
+      <div class="form-group" formGroupName="pass">
+        <input
+          type="password"
+          class="form-control"
+          placeholder="Password"
+          formControlName="password"
+        />
+        <input
+          type="password"
+          class="form-control"
+          placeholder="Confirm Password"
+          formControlName="confirmPass"
+        />
+        <small
+          *ngIf="
+            dataForm.get('pass')?.valid && dataForm.get('password')?.touched
+          "
+          class="form-text text-muted"
+          >Minimum three characters</small
+        >
+      </div>
+      <button
+        [disabled]="!dataForm.valid"
+        type="submit"
+        class="btn btn-primary"
+      >
+        Submit
+      </button>
+      <button
+      class="btn btn-primary"
+      type="button"
+      (click)="setDefault()"
+    >
+      set
+    </button>
+    </form>
+  </div>
+</div>
+
+
+
+<div class="row">
+  <div class="col-3" *ngFor="let ap of allPost">
+    <div class="card" style="width: 18rem">
+      <div class="card-body">
+        <h5 class="card-title">{{ ap.id }}</h5>
+        <h6 class="card-subtitle mb-2 text-muted">{{ ap.title }}</h6>
+        <p class="card-text">{{ ap.body }}</p>
+        <button type="button" class="btn btn-outline-primary mx-2" (click)="viewPost(ap.id)">View</button>
+        <button type="button" class="btn btn-outline-danger mx-2"(click)="deleteData(ap.id)">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="loading" class="spinner-border loading" style="width: 3rem; height: 3rem;" role="status">
+  <span class="sr-only">.</span>
+</div>

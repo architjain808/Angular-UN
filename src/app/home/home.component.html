@@ -1,0 +1,37 @@
+<form class="text-center" (ngSubmit)="onSubmit(f)" #f="ngForm">
+  <div class="row">
+    <div class="col12">
+      <input ngModel type="text" placeholder="Name" name="Name" #nameid="ngModel" required/> <br>
+      <small class="text-muted" *ngIf="!nameid.valid && nameid.touched"> Name is a Required Field</small><br />
+      <input ngModel type="email" placeholder="Email" name="email" #email="ngModel" required email/> <br>
+      <small class="text-muted" *ngIf="!email.valid && email.touched">Must be valid email</small><br />
+
+  </div>
+  
+    <div class="row col-12 mt-4">
+      <div class="col-4">
+        <input ngModel class="form-check-input" type="radio" name="loginType" id="exampleRadios1" value="New" checked>
+        <label class="form-check-label" for="exampleRadios1">
+          New User
+        </label>
+      </div>
+      <div class="col-4">
+        <input ngModel class="form-check-input" type="radio" name="loginType" id="exampleRadios2" value="waiting">
+        <label class="form-check-label" for="exampleRadios2">
+          Waiting
+        </label>
+      </div>
+      <div class="col-4">
+        <input ngModel class="form-check-input" type="radio" name="loginType" id="exampleRadios3" value="registered"  [disabled]="nameid.value == !name">
+        <label class="form-check-label" for="exampleRadios3">
+          Registered
+        </label>
+      </div>
+      <div class="col-4">
+      </div>
+    <button  class="btn btn-primary col-4 mt-4" type="submit" [disabled]="!f.valid" >submit</button>
+
+  </div>
+    
+      </div>
+</form>
